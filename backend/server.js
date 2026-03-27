@@ -52,7 +52,16 @@ app.use(fileUpload({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/event-management', {
+const mongoUri =
+  process.env.MONGO_URI ||
+  process.env.MONGODB_URI ||
+  'mongodb://localhost:27017/event-management';
+
+if (!process.env.MONGO_URI && !process.env.MONGODB_URI) {
+  console.warn('Mongo URI env missing (MONGO_URI/MONGODB_URI). Falling back to local MongoDB URI.');
+}
+
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -60,7 +69,9 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/event-manag
   console.log("MongoDB Connected ✅");
   await ensureReservedAdmin();
 })
-.catch(err => console.log("Mongo Error ❌", err));
+.catch((err) => {
+  console.error('Mongo Error ❌', err.message);
+});
 
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
