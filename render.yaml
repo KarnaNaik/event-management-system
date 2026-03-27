@@ -29,7 +29,7 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
 
-type: web
+  - type: web
     name: event-management-frontend
     env: static
     rootDir: frontend
