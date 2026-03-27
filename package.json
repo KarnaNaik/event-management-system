@@ -1,0 +1,31 @@
+{
+  "name": "event-management-system",
+  "version": "1.0.0",
+  "description": "Full-stack Event Management System with MERN stack",
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
+    "start": "npm run dev",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm start",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "event-management",
+    "mern",
+    "ticket-booking",
+    "qr-checkin"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0-alpha.16",
+    "autoprefixer": "^10.4.24",
+    "concurrently": "^8.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "4.2.1"
+  },
+  "dependencies": {
+    "express-validator": "^7.3.1"
+  }
+}

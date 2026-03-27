@@ -1,0 +1,3 @@
+@echo off
+echo Starting backend and frontend servers...
+npm run dev

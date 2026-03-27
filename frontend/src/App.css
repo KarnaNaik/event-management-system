@@ -1,0 +1,116 @@
+.App {
+  min-height: 100vh;
+}
+
+.ticket-booking-page {
+  position: relative;
+  min-height: calc(100vh - 60px);
+  padding-bottom: 2rem;
+  overflow: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.ticket-booking-page.theme-light {
+  background: linear-gradient(180deg, #f4fbff 0%, #ffffff 60%);
+  color: #102031;
+}
+
+.ticket-booking-page.theme-dark {
+  background: radial-gradient(circle at top right, #1a3a49 0%, #0e1822 60%, #091018 100%);
+  color: #d9e9f7;
+}
+
+.ticket-booking-bg {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 260px;
+  z-index: 0;
+}
+
+.theme-light .ticket-booking-bg path {
+  fill: rgba(34, 160, 125, 0.16);
+}
+
+.theme-dark .ticket-booking-bg path {
+  fill: rgba(86, 187, 151, 0.14);
+}
+
+.ticket-booking-page .container {
+  position: relative;
+  z-index: 1;
+}
+
+.ticket-booking-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ticket-booking-card {
+  animation: fadeInUp 0.5s ease;
+}
+
+.theme-dark .ticket-booking-card {
+  background: rgba(13, 29, 42, 0.92);
+  border: 1px solid rgba(115, 157, 182, 0.28);
+}
+
+.theme-dark .ticket-booking-card input,
+.theme-dark .ticket-booking-card select,
+.theme-dark .ticket-booking-card textarea {
+  background: #0a1520;
+  color: #deecf8;
+  border-color: #2b4b63;
+}
+
+.theme-dark .ticket-booking-card .btn-ghost {
+  color: #c8e0f5;
+  border-color: #3f627f;
+}
+
+.booking-cta {
+  min-width: 240px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.booking-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(31, 157, 85, 0.2);
+}
+
+.cta-confirmed {
+  background: #1f9d55 !important;
+  cursor: default;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.45s ease;
+}
+
+.pulse-soft {
+  animation: pulseSoft 1.2s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSoft {
+  0% {
+    transform: scale(0.98);
+  }
+  70% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
