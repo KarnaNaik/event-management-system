@@ -29,12 +29,11 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
 
-  - type: static
-    name: event-management-frontend
-    plan: free
+staticSites:
+  - name: event-management-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: build
+    publishPath: build
     pullRequestPreviewsEnabled: false
     envVars:
       - key: REACT_APP_API_URL
