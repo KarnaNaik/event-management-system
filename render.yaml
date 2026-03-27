@@ -29,8 +29,9 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
 
-staticSites:
-  - name: event-management-frontend
+type: web
+    name: event-management-frontend
+    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     publishPath: build
