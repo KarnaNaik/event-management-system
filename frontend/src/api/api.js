@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
-export const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '');
+// This will use your Render URL in production, and localhost when you run it locally!
+export const API_ORIGIN = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const API = axios.create({
-  baseURL: API_BASE_URL
+  baseURL: API_ORIGIN
 });
 
 // Add token to requests

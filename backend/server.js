@@ -21,7 +21,8 @@ const allowedOrigins = [
   ...parseOrigins(process.env.FRONTEND_URL),
   ...parseOrigins(process.env.FRONTEND_URLS),
   'http://localhost:3000',
-  'http://127.0.0.1:3000'
+  'http://127.0.0.1:3000',
+  'https://event-management-system-smg.netlify.app'
 ];
 
 const corsOptions = {
