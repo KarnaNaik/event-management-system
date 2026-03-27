@@ -52,15 +52,15 @@ app.use(fileUpload({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/event-management', {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/event-management', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(async () => {
-  console.log('MongoDB Connected Successfully');
+  console.log("MongoDB Connected ✅");
   await ensureReservedAdmin();
 })
-.catch(err => console.error('MongoDB Connection Error:', err));
+.catch(err => console.log("Mongo Error ❌", err));
 
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
