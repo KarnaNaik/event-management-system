@@ -1,7 +1,7 @@
 services:
   - type: web
     name: event-management-backend
-    runtime: node
+    env: node
     plan: free
     rootDir: backend
     buildCommand: npm install
@@ -10,8 +10,6 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: '10000'
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
@@ -19,7 +17,7 @@ services:
       - key: JWT_EXPIRE
         value: 7d
       - key: JWT_COOKIE_EXPIRE
-        value: '30'
+        value: 30
       - key: FRONTEND_URL
         sync: false
       - key: STRIPE_SECRET_KEY
@@ -29,16 +27,14 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
 
-  - type: static_site   # ✅ FIXED
+  - type: web
     name: event-management-frontend
+    env: node
+    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishPath: build
-    pullRequestPreviewsEnabled: false
+    startCommand: npx serve -s build -l $PORT
+    autoDeploy: true
     envVars:
       - key: REACT_APP_API_URL
         sync: false
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
