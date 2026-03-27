@@ -51,14 +51,18 @@ A comprehensive MERN stack event management system with ticket booking, QR-based
 
 ## Default Credentials
 
-Create an admin user manually in MongoDB:
-```javascript
-db.users.updateOne(
-  { email: "admin@example.com" },
-  { $set: { role: "admin" } }
-)
-```
+### For Production (Render/Heroku/etc.)
+The first admin user is created automatically on server startup based on the environment variables you set:
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
 
+Use these credentials to log in for the first time. This is the recommended method for a new deployment.
+
+### For Local Development
+If you need to make an existing local user an admin, you can run the following command in the MongoDB shell:
+```javascript
+db.users.updateOne({ email: "your-user-email@example.com" }, { $set: { role: "admin" } })
+```
 ## Troubleshooting
 
 ### 404 Error on Payment Details

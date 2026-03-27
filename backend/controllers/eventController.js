@@ -1,5 +1,6 @@
 const Event = require('../models/Event');
 const User = require('../models/User');
+const { EVENT_COLLABORATOR_ROLES, EVENT_ADMIN_ROLES } = require('../utils/roles');
 
 const getUserId = (req) => req.user.id || req.user._id?.toString();
 
@@ -11,11 +12,10 @@ const getCollaboratorRole = (event, userId) => {
 };
 
 const normalizeCollaboratorRole = (role) => {
-  const validRoles = ['admin', 'manager', 'volunteer', 'viewer', 'co_organizer'];
-  return validRoles.includes(role) ? role : 'viewer';
+  return EVENT_COLLABORATOR_ROLES.includes(role) ? role : 'viewer';
 };
 
-const isEventAdminRole = (role) => ['admin', 'co_organizer'].includes(role);
+const isEventAdminRole = (role) => EVENT_ADMIN_ROLES.includes(role);
 
 const canEditEvent = (event, req) => {
   const userId = getUserId(req);
@@ -398,8 +398,8 @@ exports.addCollaborator = async (req, res) => {
 exports.updateCollaboratorRole = async (req, res) => {
   try {
     const { role } = req.body;
-    if (!['admin', 'manager', 'volunteer', 'viewer', 'co_organizer'].includes(role)) {
-      return res.status(400).json({ success: false, message: 'Role must be admin, manager, volunteer, or viewer' });
+    if (!EVENT_COLLABORATOR_ROLES.includes(role)) {
+      return res.status(400).json({ success: false, message: `Role must be one of: ${EVENT_COLLABORATOR_ROLES.join(', ')}` });
     }
 
     const event = await Event.findById(req.params.id);

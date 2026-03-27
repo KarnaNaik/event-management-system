@@ -96,14 +96,6 @@ exports.login = async (req, res) => {
     const { email, password, role } = req.body;
     const normalizedEmail = (email || '').toLowerCase();
 
-    // Validate email & password
-    if (!normalizedEmail || !password) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please provide email and password'
-      });
-    }
-
     if (normalizedEmail === ADMIN_EMAIL && password !== ADMIN_PASSWORD) {
       return res.status(401).json({
         success: false,
@@ -166,24 +158,10 @@ exports.forgotPassword = async (req, res) => {
     const { email, newPassword } = req.body;
     const normalizedEmail = (email || '').toLowerCase();
 
-    if (!normalizedEmail || !newPassword) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please provide email and new password'
-      });
-    }
-
     if (normalizedEmail === ADMIN_EMAIL) {
       return res.status(403).json({
         success: false,
         message: 'Admin password cannot be reset from this endpoint'
-      });
-    }
-
-    if (newPassword.length < 6) {
-      return res.status(400).json({
-        success: false,
-        message: 'Password must be at least 6 characters'
       });
     }
 
